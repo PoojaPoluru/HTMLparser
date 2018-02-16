@@ -14,7 +14,10 @@ for file in files:
     artist=BS.h2.contents[0].strip()                                  #getting the contents of h2 tag for the artist name
     title = BS.title.contents[0].strip()                              #obtainign the title
     price = BS.find_all("div")[1].string                               #getting the price as string
-    sub_dict={"title":title,"price":price}                             #creating a sub dictionary
+    new_split = price.split(" ")
+    price_currency = new_split[0]                                       #getting the currency denominations by splitting the string
+    price_cost = new_split[1]
+    sub_dict={"title":title,"currency":price_currency,"amount":price_cost}                             #creating a sub dictionary
     new_dict = {"artist": artist, "works": [sub_dict]}
     arr.append(new_dict)                                               #array full
     json_obj=json.dumps(arr)                                            #getting the json format from the array
